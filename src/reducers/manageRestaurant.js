@@ -1,5 +1,16 @@
 import cuid from 'cuid';
 
-export default function manageRestaurants(state, action) {
-
-}
+export default function manageRestaurants(state =  {
+    restaurants: []
+}, action)  {
+  switch (action.type) {
+    case 'ADD_RESTAURANT':
+      const restaurant = { id: Math.random(), text: action.text }
+      return { ...state, restaurants: [...state.restaurants, restaurant] }
+    case 'DELETE_RESTAURANT':
+      const restaurants = state.restaurants.filter(restaurant => restaurant.id !== action.id);
+      return { restaurants };
+    default:
+      return state;
+  }
+};
